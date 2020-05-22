@@ -1,7 +1,10 @@
 package com.ayeshapp.spends;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -225,6 +228,38 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         //adapter.notifyDataSetChanged();
     }
 
+    public static void showAlertDialog(Context context,
+                                       String message,
+                                       String positiveButtonMessage,
+                                       String negativeButtonMesssage,
+                                       DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(context)
+                .setMessage(message)
+                .setPositiveButton(positiveButtonMessage, okListener)
+                .setNegativeButton(negativeButtonMesssage, okListener)
+                .create()
+                .show();
+    }
+
+    public void showDeleteDiolog(final int pos)
+    {
+        showAlertDialog(MainActivity.this, "Sure to Delete this Item?", "Yes", "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i == DialogInterface.BUTTON_POSITIVE) {
+                    mydb.deleteData(list.get(pos).getId().toString());
+                    totalCost -= list.get(pos).getPrice();
+                    total.setText(String.format("%.2f", totalCost));
+                    list.remove(pos);
+                    adapter.notifyDataSetChanged();
+                    dialogInterface.dismiss();
+                } else if (i == DialogInterface.BUTTON_NEGATIVE) {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+    }
+
     @Override
     public void onEditClicked(int pos) {
         //Toast.makeText(MainActivity.this, "edit clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
@@ -235,11 +270,6 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
     @Override
     public void onDeleteClicked(int pos) {
         //Toast.makeText(MainActivity.this, "delete clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
-        mydb.deleteData(list.get(pos).getId().toString());
-        totalCost -= list.get(pos).getPrice();
-        total.setText(String.format("%.2f", totalCost));
-        list.remove(pos);
-        adapter.notifyDataSetChanged();
-
+        showDeleteDiolog(pos);
     }
 }
