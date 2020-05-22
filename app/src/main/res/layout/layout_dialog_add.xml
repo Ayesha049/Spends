@@ -61,8 +61,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Add"
+                            android:textColor="#ffff"
                             android:background="@drawable/custom_button"
-                            android:textColor="@color/colorBackground"
                             android:layout_margin="2dp"/>
 
                 </LinearLayout>

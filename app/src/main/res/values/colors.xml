@@ -3,6 +3,8 @@
     <color name="colorPrimary">#4e342e</color>
     <color name="colorPrimaryDark">#3e2723</color>
     <color name="colorAccent">#FFD934</color>
-    <color name="colorBackground">#4CAF50</color>
+    <color name="colorBackground">#0FFFFFFF</color>
     <color name="colorNegButton">#DFDEDE</color>
+    <color name="colorBorderLine">#AC8E8A</color>
+    <color name="colorText">#ffff</color>
 </resources>
