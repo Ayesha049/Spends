@@ -1,5 +1,6 @@
 package com.ayeshapp.spends;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     EditText name, amount, price;
     Button add;
     Button cancel;
+    TextView total;
     RecyclerView recyclerView;
     FloatingActionButton fab;
 
@@ -37,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
     SpendAdapter adapter;
 
     DatabaseHelper mydb;
+    double totalCost = 0.0;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DatabaseHelper(this);
         calender = findViewById(R.id.calenderview);
+        total = findViewById(R.id.total);
+
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         date = sdf.format(new Date(calender.getDate()));
         viewAll(date);
+        total.setText(Double.toString(totalCost));
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange( CalendarView view, int year, int month, int dayOfMonth) {
@@ -65,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
                 if (month < 10) date += "0";
                 date += month + "/" + year;
                 list.clear();
+                totalCost = 0.0;
                 viewAll(date);
                 adapter.notifyDataSetChanged();
+                total.setText(Double.toString(totalCost));
             }
         });
 
@@ -109,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Please fill up",Toast.LENGTH_LONG).show();
                 } else {
                     list.add(new SpendModel(date,n,Double.parseDouble(q),Double.parseDouble(p)));
+                    totalCost += Double.parseDouble(p);
+                    total.setText(Double.toString(totalCost));
                     mydb.insertData(date,n,q,p);
                     adapter.notifyDataSetChanged();
                 }
@@ -129,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewAll(String date) {
         //list.clear();
+
         Cursor res = mydb.getAllData(date);
         if(res.getCount() == 0) {
             return;
@@ -138,8 +151,10 @@ public class MainActivity extends AppCompatActivity {
                     res.getString(2),
                     res.getDouble(3),
                     res.getDouble(4)));
+            totalCost += res.getDouble(4);
             //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
         }
+
         //adapter.notifyDataSetChanged();
     }
 }
