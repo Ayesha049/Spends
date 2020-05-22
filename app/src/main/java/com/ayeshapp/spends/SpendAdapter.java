@@ -37,8 +37,8 @@ public class SpendAdapter extends RecyclerView.Adapter<SpendAdapter.viewHolder> 
         SpendModel model = list.get(i);
 
         viewHolder.itemName.setText(model.getItemName());
-        viewHolder.quantity.setText(model.getAmount().toString() + " Kg");
-        viewHolder.price.setText(model.getPrice().toString() + " TK");
+        viewHolder.quantity.setText(model.getAmount().toString());
+        viewHolder.price.setText(model.getPrice().toString());
     }
 
     @Override
