@@ -1,6 +1,7 @@
 package com.ayeshapp.spends;
 
 public class SpendModel {
+    Long id;
     String date;
     String itemName;
     Double amount;
@@ -9,11 +10,20 @@ public class SpendModel {
     public SpendModel() {
     }
 
-    public SpendModel(String date, String itemName, Double amount, Double price) {
+    public SpendModel(Long id, String date, String itemName, Double amount, Double price) {
+        this.id = id;
         this.date = date;
         this.itemName = itemName;
         this.amount = amount;
         Price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDate() {

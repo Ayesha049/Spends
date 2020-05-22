@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String date,String itemName,String quan, String price) {
+    public long insertData(String date,String itemName,String quan, String price) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_DATE,date);
@@ -44,10 +44,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_ITEM_QUANTUTY,quan);
         contentValues.put(COL_ITEM_PRICE,price);
         long result = db.insert(TABLE_NAME,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
+        return result;
+    }
+
+    public void updateData(String id,String date,String itemName,String quan, String price) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID",id);
+        contentValues.put(COL_DATE,date);
+        contentValues.put(COL_ITEM_NAME,itemName);
+        contentValues.put(COL_ITEM_QUANTUTY,quan);
+        contentValues.put(COL_ITEM_PRICE,price);
+        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
+    }
+
+    public Integer deleteData (String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
     }
 
     public Cursor getAllData(String date) {
