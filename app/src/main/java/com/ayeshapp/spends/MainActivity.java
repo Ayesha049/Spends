@@ -54,6 +54,21 @@ public class MainActivity extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if(dy<0){
+                    fab.show();
+                }else{
+                    fab.hide();
+                }
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         adapter = new SpendAdapter(list);
@@ -86,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showDialog();
             }
+
         });
     }
 
