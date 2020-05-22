@@ -7,15 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class SpendAdapter extends RecyclerView.Adapter<SpendAdapter.viewHolder> {
     ArrayList<SpendModel> list;
+    OnSpendItemClick onSpendItemClick;
 
-    public SpendAdapter(ArrayList<SpendModel> list) {
+    public SpendAdapter(ArrayList<SpendModel> list, OnSpendItemClick onSpendItemClick) {
         this.list = list;
+        this.onSpendItemClick = onSpendItemClick;
     }
 
     @NonNull
@@ -25,7 +28,7 @@ public class SpendAdapter extends RecyclerView.Adapter<SpendAdapter.viewHolder> 
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View contactView = inflater.inflate(R.layout.layout_row_spend_item, viewGroup, false);
-        return new viewHolder(contactView);
+        return new viewHolder(contactView, onSpendItemClick);
     }
 
     @SuppressLint("SetTextI18n")
@@ -46,13 +49,30 @@ public class SpendAdapter extends RecyclerView.Adapter<SpendAdapter.viewHolder> 
     public class viewHolder extends RecyclerView.ViewHolder{
 
         TextView itemName, quantity, price;
+        ImageView edit, delete;
 
-        public viewHolder(@NonNull View itemView) {
+        OnSpendItemClick onSpendItemClick;
+
+        public viewHolder(@NonNull View itemView, final OnSpendItemClick onSpendItemClick) {
             super(itemView);
 
             itemName = itemView.findViewById(R.id.item_name);
             quantity = itemView.findViewById(R.id.item_quantity);
             price = itemView.findViewById(R.id.item_price);
+            edit = itemView.findViewById(R.id.edit_icon);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSpendItemClick.onEditClicked(getAdapterPosition());
+                }
+            });
+            delete = itemView.findViewById(R.id.delete_icon);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSpendItemClick.onDeleteClicked(getAdapterPosition());
+                }
+            });
         }
     }
 }

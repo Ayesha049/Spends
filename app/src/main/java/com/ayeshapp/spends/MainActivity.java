@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
 
     CalendarView calender;
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-        adapter = new SpendAdapter(list);
+        adapter = new SpendAdapter(list, this);
         recyclerView.setAdapter(adapter);
 
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -163,5 +163,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEditClicked(int pos) {
+        Toast.makeText(MainActivity.this, "edit clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDeleteClicked(int pos) {
+        Toast.makeText(MainActivity.this, "delete clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
     }
 }
