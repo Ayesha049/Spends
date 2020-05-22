@@ -20,38 +20,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight=".7">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total"/>
+                android:text="Total"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textColor="@color/colorText"
+                android:layout_marginLeft="8dp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight=".15">
             <TextView
                 android:id="@+id/total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="100"/>
+                android:text="100"
+                android:gravity="end"
+                android:textSize="20dp"
+                android:textColor="@color/colorText"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight=".15">
             <TextView
                 android:id="@+id/taka"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Taka"/>
+                android:text="Taka"
+                android:textSize="20dp"
+                android:textColor="@color/colorText"
+                android:layout_marginLeft="2dp"/>
         </LinearLayout>
 
     </LinearLayout>
