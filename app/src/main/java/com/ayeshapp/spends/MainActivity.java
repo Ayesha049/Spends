@@ -167,11 +167,14 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
 
     @Override
     public void onEditClicked(int pos) {
-        Toast.makeText(MainActivity.this, "edit clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this, "edit clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onDeleteClicked(int pos) {
-        Toast.makeText(MainActivity.this, "delete clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this, "delete clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
+        mydb.deleteData(list.get(pos).getId().toString());
+        list.remove(pos);
+        adapter.notifyDataSetChanged();
     }
 }
