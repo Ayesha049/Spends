@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                     long id = mydb.insertData(date,n,q,p);
                     if (id != -1) {
                         list.add(new SpendModel(id, date,n,Double.parseDouble(q),Double.parseDouble(p)));
-                        Log.e("testingid", Long.toString(id));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -161,9 +160,9 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         final SpendModel model = list.get(pos);
         name.setText(model.getItemName());
         amount = dialog.findViewById(R.id.item_quantity);
-        amount.setText(model.getAmount().toString() + " Kg");
+        amount.setText(model.getAmount().toString());
         price = dialog.findViewById(R.id.item_price);
-        price.setText(model.getPrice().toString() + " TK");
+        price.setText(model.getPrice().toString());
 
 
 
@@ -220,7 +219,6 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                     res.getDouble(3),
                     res.getDouble(4)));
             totalCost += res.getDouble(4);
-            Log.e("testingid", res.getString(0));
             //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
         }
 
