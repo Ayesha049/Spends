@@ -1,6 +1,7 @@
 package com.ayeshapp.spends;
 
 import android.app.Dialog;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -34,15 +35,25 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<SpendModel> list;
     SpendAdapter adapter;
 
+    DatabaseHelper mydb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mydb = new DatabaseHelper(this);
         calender = findViewById(R.id.calenderview);
+
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        list = new ArrayList<>();
+        adapter = new SpendAdapter(list);
+        recyclerView.setAdapter(adapter);
 
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         date = sdf.format(new Date(calender.getDate()));
+        viewAll(date);
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange( CalendarView view, int year, int month, int dayOfMonth) {
@@ -52,16 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 date += dayOfMonth + "/";
                 if (month < 10) date += "0";
                 date += month + "/" + year;
-                //Toast.makeText(MainActivity.this, date,Toast.LENGTH_LONG).show();
+                list.clear();
+                viewAll(date);
+                adapter.notifyDataSetChanged();
             }
         });
-
-
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        list = new ArrayList<>();
-        adapter = new SpendAdapter(list);
-        recyclerView.setAdapter(adapter);
 
         fab = findViewById(R.id.myFAB);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -102,11 +108,29 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Please fill up",Toast.LENGTH_LONG).show();
                 } else {
                     list.add(new SpendModel(date,n,Double.parseDouble(q),Double.parseDouble(p)));
+                    mydb.insertData(date,n,q,p);
                     adapter.notifyDataSetChanged();
                 }
             }
         });
 
         dialog.show();
+    }
+
+
+    public void viewAll(String date) {
+        //list.clear();
+        Cursor res = mydb.getAllData(date);
+        if(res.getCount() == 0) {
+            return;
+        }
+        while (res.moveToNext()) {
+            list.add(new SpendModel(res.getString(1),
+                    res.getString(2),
+                    res.getDouble(3),
+                    res.getDouble(4)));
+            //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
+        }
+        //adapter.notifyDataSetChanged();
     }
 }
