@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText name, amount, price;
     Button add;
+    Button cancel;
     RecyclerView recyclerView;
     FloatingActionButton fab;
 
@@ -111,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
                     mydb.insertData(date,n,q,p);
                     adapter.notifyDataSetChanged();
                 }
+            }
+        });
+
+        cancel = dialog.findViewById(R.id.btn_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
 

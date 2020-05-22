@@ -2,29 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_margin="8dp"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:layout_margin="12dp">
 
-    <TextView
-        android:id="@+id/item_name"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content"
-        android:text="Onion"/>
+        android:layout_height="match_parent"
+        android:layout_weight=".5">
 
-    <TextView
-        android:id="@+id/item_quantity"
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Onion"/>
+
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="2 Kg"/>
+        android:layout_height="match_parent"
+        android:layout_weight=".1">
 
-    <TextView
-        android:id="@+id/item_price"
+        <TextView
+            android:id="@+id/item_quantity"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="2 Kg"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:text="200 TK"/>
+        android:layout_height="match_parent"
+        android:layout_weight=".15">
 
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="200 TK"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -8,36 +8,64 @@
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:hint="Item Name"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:hint="Item"/>
 
         <EditText
             android:id="@+id/item_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:inputType="number"
-            android:hint="Quantity in Kg"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:inputType="number|numberDecimal"
+            android:hint="Quantity (KG)"/>
 
         <EditText
             android:id="@+id/item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:inputType="number"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:inputType="number|numberDecimal"
             android:hint="Price"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="8dp">
 
-            <Button
-                android:id="@+id/btn_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:hint="Add"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".7">
+
+                        <Button
+                            android:id="@+id/btn_cancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cancel"
+                            android:background="@drawable/custom_neg_button"
+                            android:layout_margin="2dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".2">
+
+                        <Button
+                            android:id="@+id/btn_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Add"
+                            android:background="@drawable/custom_button"
+                            android:textColor="@color/colorBackground"
+                            android:layout_margin="2dp"/>
+
+                </LinearLayout>
 
         </LinearLayout>
 
