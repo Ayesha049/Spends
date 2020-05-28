@@ -87,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_edit_green_24dp"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/imageview_pressed"/>
+                android:background="@drawable/light_imageview_pressed"/>
 
         </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_delete_red_24dp"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/imageview_pressed"/>
+                android:background="@drawable/light_imageview_pressed"/>
 
         </LinearLayout>
 
