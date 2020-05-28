@@ -91,7 +91,7 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:padding="4dp"
-                    android:background="@drawable/textview_pressed"/>
+                    android:background="@drawable/primary_textview_pressed"/>
 
             </LinearLayout>
 
