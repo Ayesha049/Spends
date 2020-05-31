@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/colorAccent</item>    //indicator color
+        <item name="tabIndicatorHeight">4dp</item>                //indicator height
+        <item name="tabPaddingStart">6dp</item>
+        <item name="tabPaddingEnd">6dp</item>
+        <item name="tabSelectedTextColor">@color/colorText</item>
+    </style>
+
 </resources>

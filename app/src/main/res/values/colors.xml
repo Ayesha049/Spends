@@ -7,4 +7,5 @@
     <color name="colorNegButton">#DFDEDE</color>
     <color name="colorBorderLine">#AC8E8A</color>
     <color name="colorText">#ffff</color>
+    <color name="colorTabIndicator">#EAEAEA</color>
 </resources>

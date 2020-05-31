@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 
 import com.google.android.gms.ads.AdRequest;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
     RecyclerView recyclerView;
     FloatingActionButton fab;
 
+    TextView textView;
+
     ArrayList<SpendModel> list;
     SpendAdapter adapter;
 
@@ -60,6 +63,15 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textView = findViewById(R.id.statistics);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
