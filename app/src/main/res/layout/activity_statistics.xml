@@ -15,7 +15,7 @@
         app:tabMode="fixed"
         app:tabTextColor="@color/colorText"
         app:tabIndicator="@color/colorText"
-        style="@style/AppTabLayout"/>
+        style="@style/AppTabLayout" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_statistics"

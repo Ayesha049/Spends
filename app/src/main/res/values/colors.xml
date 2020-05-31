@@ -8,4 +8,5 @@
     <color name="colorBorderLine">#AC8E8A</color>
     <color name="colorText">#ffff</color>
     <color name="colorTabIndicator">#EAEAEA</color>
+    <color name="colorSegmentBackground">#ECECEC</color>
 </resources>
