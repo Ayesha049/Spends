@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <EditText
+                <TextView
                     android:id="@+id/start_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -70,7 +70,7 @@
                     android:hint="1/06/2020"
                     android:padding="6dp">
 
-                </EditText>
+                </TextView>
 
             </LinearLayout>
 
@@ -79,7 +79,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
-                <EditText
+                <TextView
                     android:id="@+id/finish_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -90,7 +90,7 @@
                     android:hint="4/06/2020"
                     android:padding="6dp">
 
-                </EditText>
+                </TextView>
             </LinearLayout>
         </LinearLayout>
 
