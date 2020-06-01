@@ -80,12 +80,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/invisible_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp"
-        android:layout_marginBottom="4dp">
+        android:layout_marginRight="64dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -131,7 +131,7 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/add_memo"
+                android:id="@+id/camera_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_camera_alt_24"
