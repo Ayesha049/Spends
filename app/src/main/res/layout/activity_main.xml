@@ -35,13 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/colorPrimary"
             android:padding="4dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight=".7">
+                android:layout_weight=".7"
+                android:background="@drawable/layout_border"
+                android:padding="2dp">
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -53,26 +54,26 @@
                         android:layout_height="wrap_content"
                         android:text="Daily"
                         android:textSize="16sp"
-                        android:textColor="@color/colorText"
+                        android:textColor="@color/colorPrimary"
                         android:layout_marginRight="6dp"
-                        android:buttonTint="@color/colorText"/>
+                        android:buttonTint="@color/colorPrimary"/>
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weekly"
                         android:textSize="16sp"
-                        android:textColor="@color/colorText"
+                        android:textColor="@color/colorPrimary"
                         android:layout_marginRight="6dp"
-                        android:buttonTint="@color/colorText"/>
+                        android:buttonTint="@color/colorPrimary"/>
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Monthly"
                         android:textSize="16sp"
-                        android:textColor="@color/colorText"
-                        android:buttonTint="@color/colorText"/>
+                        android:textColor="@color/colorPrimary"
+                        android:buttonTint="@color/colorPrimary"/>
 
                 </RadioGroup>
 
@@ -81,7 +82,15 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight=".3">
+                android:layout_weight=".05">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:background="@drawable/primary_textview_background">
 
                 <TextView
                     android:id="@+id/statistics"
