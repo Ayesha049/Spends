@@ -20,6 +20,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     SELECT *
     FROM Spend
     WHERE date(date) BETWEEN date('2020-06-02') AND date('2020-06-08')
+
+    SELECT * FROM Spend WHERE strftime('%W', date) = strftime('%W', '2020-06-12') and strftime('%Y', date) = '2020';
+
+    SELECT * FROM Spend WHERE strftime('%m', date) = '06'
+    and strftime('%Y', date) = '2020';
     */
 
 
