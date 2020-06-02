@@ -13,12 +13,19 @@ import androidx.fragment.app.Fragment;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class FragmentPeriodically extends Fragment {
     View view;
     TextView startEditDate;
     TextView finishEditDate;
+
+    int sDay,sYear,sMon,eDay,eYear,eMon;
+
+    String startDate = "", endDate = "";
+
+    DatabaseHelper mydb;
 
     public FragmentPeriodically() {
     }
@@ -38,6 +45,21 @@ public class FragmentPeriodically extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mydb = new DatabaseHelper(getContext());
+
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        startDate = sdf.format(Calendar.getInstance().getTime());
+        endDate = sdf.format(Calendar.getInstance().getTime());
+
+        sYear = Calendar.getInstance().get(Calendar.YEAR);
+        eYear = sYear;
+        sMon = Calendar.getInstance().get(Calendar.MONTH);
+        eMon = sMon;
+        sDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        eDay = sDay;
+
+
         startEditDate = view.findViewById(R.id.start_date);
         startEditDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,25 +75,26 @@ public class FragmentPeriodically extends Fragment {
                 showDatePicker(2);
             }
         });
+
+        startEditDate.setText(startDate);
+        finishEditDate.setText(endDate);
     }
 
     private void showDatePicker(int pos) {
         DatePickerFragment date = new DatePickerFragment();
-        /**
-         * Set Up Current Date Into dialog
-         */
-        Calendar calender = Calendar.getInstance();
-        Bundle args = new Bundle();
-        args.putInt("year", calender.get(Calendar.YEAR));
-        args.putInt("month", calender.get(Calendar.MONTH));
-        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
-        date.setArguments(args);
-        /**
-         * Set Call back to capture selected date
-         */
         if(pos == 1){
+            Bundle args = new Bundle();
+            args.putInt("year", sYear);
+            args.putInt("month", sMon);
+            args.putInt("day", sDay);
+            date.setArguments(args);
             date.setCallBack(ondatestart);
         } else{
+            Bundle args = new Bundle();
+            args.putInt("year", eYear);
+            args.putInt("month", eMon);
+            args.putInt("day", eDay);
+            date.setArguments(args);
             date.setCallBack(ondatefinish);
 
         }
@@ -82,8 +105,11 @@ public class FragmentPeriodically extends Fragment {
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
 
-            startEditDate.setText(String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1)
-                    + "-" + String.valueOf(year));
+            startDate = format(year,monthOfYear+1, dayOfMonth);
+            sDay = dayOfMonth;
+            sMon = monthOfYear;
+            sYear = year;
+            startEditDate.setText(startDate);
         }
     };
 
@@ -92,9 +118,22 @@ public class FragmentPeriodically extends Fragment {
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
 
-            finishEditDate.setText(String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1)
-                    + "-" + String.valueOf(year));
+            endDate = format(year,monthOfYear+1, dayOfMonth);
+            eDay = dayOfMonth;
+            eMon = monthOfYear;
+            eYear = year;
+            finishEditDate.setText(endDate);
         }
     };
+
+    public String format(int year, int month, int dayOfMonth) {
+        String date = "";
+        date+= year + "-";
+        if (month < 10) date += "0";
+        date+= month + "-";
+        if (dayOfMonth < 10) date += "0";
+        date += dayOfMonth;
+        return date;
+    }
 
 }

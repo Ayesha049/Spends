@@ -13,13 +13,21 @@ public class FragmentWeekly extends Fragment {
 
     View view;
 
-    public FragmentWeekly() {
-    }
+    DatabaseHelper mydb;
+
+    public FragmentWeekly() {}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.weekly_fragment, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mydb = new DatabaseHelper(getContext());
     }
 }

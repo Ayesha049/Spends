@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Spends.db";
@@ -15,9 +16,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_DATE = "date";
     public static final String COL_ITEM_PRICE = "price";
 
+    /*
+    SELECT *
+    FROM Spend
+    WHERE date(date) BETWEEN date('2020-06-02') AND date('2020-06-08')
+    */
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        Log.e("inDB", "Database initiated");
     }
 
     @Override
@@ -72,6 +80,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getDistincDates() {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME;
+        Cursor res = db.rawQuery(selectQuery,null);
+        return res;
+    }
+
+    public Cursor getDataPeriodically(String s, String e) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date(" +
+                                    s + ") AND date(" + e + ")";
         Cursor res = db.rawQuery(selectQuery,null);
         return res;
     }

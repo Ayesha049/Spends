@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
     RecyclerView recyclerView;
     FloatingActionButton fab;
 
-    TextView textView;
+    TextView statistics;
 
     ArrayList<SpendModel> list;
     SpendAdapter adapter;
@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.statistics);
-        textView.setOnClickListener(new View.OnClickListener() {
+        statistics = findViewById(R.id.statistics);
+        statistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         adapter = new SpendAdapter(list, this);
         recyclerView.setAdapter(adapter);
 
-        final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         date = sdf.format(Calendar.getInstance().getTime());
         //Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();
         viewAll(date);
@@ -133,10 +133,11 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                 dayOfMonth = clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
                 month++;
                 date = "";
-                if (dayOfMonth < 10) date += "0";
-                date += dayOfMonth + "/";
+                date+= year + "-";
                 if (month < 10) date += "0";
-                date += month + "/" + year;
+                date+= month + "-";
+                if (dayOfMonth < 10) date += "0";
+                date += dayOfMonth;
                 list.clear();
                 totalCost = 0.0;
                 viewAll(date);
@@ -153,19 +154,6 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                 showDialog();
             }
 
-        });
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                /*if(dy<0){
-                    fab.show();
-                }else if(dy>0){
-                    fab.hide();
-                }else{
-                    fab.show();
-                }*/
-            }
         });
 
         upArrow = findViewById(R.id.up_arrow);
@@ -337,12 +325,12 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         }
         while (res.moveToNext()) {
             String d = res.getString(0);
-            String[] values = d.split("/");
+            String[] values = d.split("-");
             Log.e("datee", values[0] + " " + values[1] + " " + values[2]);
-            int day = Integer.parseInt(values[0]);
+            int day = Integer.parseInt(values[2]);
             int month = Integer.parseInt(values[1]);
             month--;
-            int year = Integer.parseInt(values[2]);
+            int year = Integer.parseInt(values[0]);
 
             Log.e("datee", Integer.toString(day) + " " + Integer.toString(month) + " " + Integer.toString(year));
 
