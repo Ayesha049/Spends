@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -15,17 +18,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +42,9 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
 
@@ -57,6 +66,14 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
 
     DatabaseHelper mydb;
     double totalCost = 0.0;
+
+    List<EventDay> events;
+    List<Calendar> cals;
+
+    RelativeLayout calLayout;
+    int toogle = 1;
+
+    ImageView upArrow, downArrow;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -84,9 +101,14 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         mAdView.loadAd(adRequest);
 
         mydb = new DatabaseHelper(this);
-        calender = findViewById(R.id.calenderview);
+        calender = findViewById(R.id.calendarView);
+        calLayout = findViewById(R.id.calender_layout);
         total = findViewById(R.id.total);
 
+        events = new ArrayList<>();
+        cals = new ArrayList<>();
+        initiate();
+        calender.setHighlightedDays(cals);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -96,12 +118,19 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         recyclerView.setAdapter(adapter);
 
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        date = sdf.format(new Date(calender.getDate()));
+        date = sdf.format(Calendar.getInstance().getTime());
+        //Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();
         viewAll(date);
         total.setText(String.format("%.2f", totalCost));
-        calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+        calender.setOnDayClickListener(new OnDayClickListener() {
             @Override
-            public void onSelectedDayChange( CalendarView view, int year, int month, int dayOfMonth) {
+            public void onDayClick(EventDay eventDay) {
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+                int year, month, dayOfMonth;
+                year = clickedDayCalendar.get(Calendar.YEAR);
+                month = clickedDayCalendar.get(Calendar.MONTH);
+                dayOfMonth = clickedDayCalendar.get(Calendar.DAY_OF_MONTH);
                 month++;
                 date = "";
                 if (dayOfMonth < 10) date += "0";
@@ -113,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                 viewAll(date);
                 adapter.notifyDataSetChanged();
                 total.setText(String.format("%.2f", totalCost));
+                //Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -128,13 +158,34 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if(dy<0){
+                /*if(dy<0){
                     fab.show();
                 }else if(dy>0){
                     fab.hide();
                 }else{
                     fab.show();
-                }
+                }*/
+            }
+        });
+
+        upArrow = findViewById(R.id.up_arrow);
+        downArrow = findViewById(R.id.down_arrow);
+
+        upArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calLayout.setVisibility(View.GONE);
+                upArrow.setVisibility(View.GONE);
+                downArrow.setVisibility(View.VISIBLE);
+            }
+        });
+
+        downArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calLayout.setVisibility(View.VISIBLE);
+                upArrow.setVisibility(View.VISIBLE);
+                downArrow.setVisibility(View.GONE);
             }
         });
     }
@@ -177,6 +228,9 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                         list.add(new SpendModel(id, date,n,Double.parseDouble(q),Double.parseDouble(p)));
                     }
                     adapter.notifyDataSetChanged();
+                    cals.clear();
+                    initiate();
+                    calender.setHighlightedDays(cals);
                 }
             }
         });
@@ -238,6 +292,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                     model.setAmount(Double.parseDouble(q));
                     model.setPrice(Double.parseDouble(p));
                     adapter.notifyDataSetChanged();
+
                 }
             }
         });
@@ -274,6 +329,32 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         //adapter.notifyDataSetChanged();
     }
 
+    public void initiate() {
+
+        Cursor res = mydb.getDistincDates();
+        if(res.getCount() == 0) {
+            return;
+        }
+        while (res.moveToNext()) {
+            String d = res.getString(0);
+            String[] values = d.split("/");
+            Log.e("datee", values[0] + " " + values[1] + " " + values[2]);
+            int day = Integer.parseInt(values[0]);
+            int month = Integer.parseInt(values[1]);
+            month--;
+            int year = Integer.parseInt(values[2]);
+
+            Log.e("datee", Integer.toString(day) + " " + Integer.toString(month) + " " + Integer.toString(year));
+
+            Calendar c = Calendar.getInstance();
+            c.set(year,month,day);
+            //events.add( new EventDay(c, R.drawable.sample_icon,  Color.parseColor("#228B22")) );
+            cals.add(c);
+        }
+        calender.setHighlightedDays(cals);
+        //calender.setEvents(events);
+    }
+
     public static void showAlertDialog(Context context,
                                        String message,
                                        String positiveButtonMessage,
@@ -298,6 +379,9 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
                     total.setText(String.format("%.2f", totalCost));
                     list.remove(pos);
                     adapter.notifyDataSetChanged();
+                    cals.clear();
+                    initiate();
+                    calender.setHighlightedDays(cals);
                     dialogInterface.dismiss();
                 } else if (i == DialogInterface.BUTTON_NEGATIVE) {
                     dialogInterface.dismiss();

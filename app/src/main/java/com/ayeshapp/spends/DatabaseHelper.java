@@ -68,4 +68,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery(selectQuery,null);
         return res;
     }
+
+    public Cursor getDistincDates() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME;
+        Cursor res = db.rawQuery(selectQuery,null);
+        return res;
+    }
 }

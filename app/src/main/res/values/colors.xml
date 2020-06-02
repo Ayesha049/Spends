@@ -9,4 +9,5 @@
     <color name="colorText">#ffff</color>
     <color name="colorTabIndicator">#EAEAEA</color>
     <color name="colorSegmentBackground">#ECECEC</color>
+    <color name="colorHighlight">#BE2AD6</color>
 </resources>
