@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +29,10 @@ public class FragmentPeriodically extends Fragment {
     TextView finishEditDate;
     Button show;
 
-    ArrayList<SpendModel> list;
+    //ArrayList<String> dates;
+    ArrayList<OuterModel> models;
+    RecyclerView recyclerView;
+    OuterAdapter adapter;
 
     int sDay,sYear,sMon,eDay,eYear,eMon;
 
@@ -71,8 +76,12 @@ public class FragmentPeriodically extends Fragment {
         eDay = sDay;
 
         //recyclerview
-        list = new ArrayList<>();
-
+        //dates = new ArrayList<>();
+        models = new ArrayList<>();
+        adapter = new OuterAdapter(models);
+        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
 
         startEditDate = view.findViewById(R.id.start_date);
         startEditDate.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +106,9 @@ public class FragmentPeriodically extends Fragment {
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                models.clear();
                 fetchData();
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -165,14 +176,36 @@ public class FragmentPeriodically extends Fragment {
             return;
         }
         while (res.moveToNext()) {
-            list.add(new SpendModel(res.getLong(0),
+            //dates.add(res.getString(1));
+            viewAll(res.getString(0));
+            Log.i("testing", res.getString(0));
+        }
+    }
+
+    public void viewAll(String date) {
+        //list.clear();
+
+        Cursor res = mydb.getAllData(date);
+        if(res.getCount() == 0) {
+            return;
+        }
+
+        Double total = 0.0;
+        ArrayList<SpendModel> model;
+        model = new ArrayList<>();
+        while (res.moveToNext()) {
+            model.add(new SpendModel(res.getLong(0),
                     res.getString(1),
                     res.getString(2),
                     res.getDouble(3),
                     res.getDouble(4)));
-
-            Log.i("testing", res.getString(1) + " " + res.getString(2));
+            total += res.getDouble(4);
+            //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
         }
+        Log.i("testing", date + " toatl : " + total.toString());
+        models.add(new OuterModel(date,total,model));
+
+        //adapter.notifyDataSetChanged();
     }
 
 

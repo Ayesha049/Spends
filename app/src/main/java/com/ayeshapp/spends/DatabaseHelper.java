@@ -91,8 +91,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataPeriodically(String s, String e) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date('" +
-                                    s + "') AND date('" + e + "')";
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date('" +
+                                    s + "') AND date('" + e + "') ORDER BY date(" + COL_DATE + ") DESC" ;
+        Log.i("query", selectQuery);
+        Cursor res = db.rawQuery(selectQuery,null);
+        return res;
+    }
+
+    public Cursor getDataYearly(String s) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE strftime('%Y', " +
+                COL_DATE + ") = '" + s + "' ORDER BY date(" + COL_DATE + ") DESC" ;
+        Log.i("query", selectQuery);
+        Cursor res = db.rawQuery(selectQuery,null);
+        return res;
+    }
+
+    public Cursor getDataMonthly(String y, String m) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE strftime('%m', date) = '" + m
+                                + "' and strftime('%Y', date) = '" + y + "' ORDER BY date(" + COL_DATE + ") DESC" ;
         Log.i("query", selectQuery);
         Cursor res = db.rawQuery(selectQuery,null);
         return res;
