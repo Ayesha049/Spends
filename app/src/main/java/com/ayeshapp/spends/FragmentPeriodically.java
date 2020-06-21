@@ -1,10 +1,13 @@
 package com.ayeshapp.spends;
 
 import android.app.DatePickerDialog;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -14,12 +17,17 @@ import androidx.fragment.app.Fragment;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class FragmentPeriodically extends Fragment {
     View view;
     TextView startEditDate;
     TextView finishEditDate;
+    Button show;
+
+    ArrayList<SpendModel> list;
 
     int sDay,sYear,sMon,eDay,eYear,eMon;
 
@@ -48,16 +56,22 @@ public class FragmentPeriodically extends Fragment {
 
         mydb = new DatabaseHelper(getContext());
 
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        startDate = sdf.format(Calendar.getInstance().getTime());
-        endDate = sdf.format(Calendar.getInstance().getTime());
+        Calendar cc = Calendar.getInstance();
+        cc.setTimeZone(TimeZone.getDefault());
 
-        sYear = Calendar.getInstance().get(Calendar.YEAR);
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        startDate = sdf.format(cc.getTime());
+        endDate = sdf.format(cc.getTime());
+
+        sYear = cc.get(Calendar.YEAR);
         eYear = sYear;
-        sMon = Calendar.getInstance().get(Calendar.MONTH);
+        sMon = cc.get(Calendar.MONTH);
         eMon = sMon;
-        sDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        sDay = cc.get(Calendar.DAY_OF_MONTH);
         eDay = sDay;
+
+        //recyclerview
+        list = new ArrayList<>();
 
 
         startEditDate = view.findViewById(R.id.start_date);
@@ -78,6 +92,14 @@ public class FragmentPeriodically extends Fragment {
 
         startEditDate.setText(startDate);
         finishEditDate.setText(endDate);
+
+        show = view.findViewById(R.id.show_data);
+        show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fetchData();
+            }
+        });
     }
 
     private void showDatePicker(int pos) {
@@ -135,5 +157,23 @@ public class FragmentPeriodically extends Fragment {
         date += dayOfMonth;
         return date;
     }
+
+    void fetchData() {
+        Cursor res = mydb.getDataPeriodically(startDate,endDate);
+        if(res.getCount() == 0) {
+            Log.i("testing", startDate + " " + endDate+ " no data");
+            return;
+        }
+        while (res.moveToNext()) {
+            list.add(new SpendModel(res.getLong(0),
+                    res.getString(1),
+                    res.getString(2),
+                    res.getDouble(3),
+                    res.getDouble(4)));
+
+            Log.i("testing", res.getString(1) + " " + res.getString(2));
+        }
+    }
+
 
 }

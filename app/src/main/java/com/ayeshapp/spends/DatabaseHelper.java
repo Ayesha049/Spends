@@ -91,8 +91,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataPeriodically(String s, String e) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date(" +
-                                    s + ") AND date(" + e + ")";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date('" +
+                                    s + "') AND date('" + e + "')";
+        Log.i("query", selectQuery);
         Cursor res = db.rawQuery(selectQuery,null);
         return res;
     }
