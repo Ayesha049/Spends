@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -50,11 +51,14 @@ public class SpendAdapter extends RecyclerView.Adapter<SpendAdapter.viewHolder> 
 
         TextView itemName, quantity, price;
         ImageView edit, delete;
+        LinearLayout invisibleLayout;
 
         OnSpendItemClick onSpendItemClick;
 
         public viewHolder(@NonNull View itemView, final OnSpendItemClick onSpendItemClick) {
             super(itemView);
+
+
 
             itemName = itemView.findViewById(R.id.item_name);
             quantity = itemView.findViewById(R.id.item_quantity);
@@ -71,6 +75,19 @@ public class SpendAdapter extends RecyclerView.Adapter<SpendAdapter.viewHolder> 
                 @Override
                 public void onClick(View v) {
                     onSpendItemClick.onDeleteClicked(getAdapterPosition());
+                }
+            });
+
+            invisibleLayout = itemView.findViewById(R.id.invisible_layout);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(invisibleLayout.getVisibility() == View.GONE) {
+                        invisibleLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        invisibleLayout.setVisibility(View.GONE);
+                    }
                 }
             });
         }

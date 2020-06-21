@@ -85,6 +85,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="64dp"
+        android:visibility="gone"
         android:layout_marginRight="64dp">
 
         <LinearLayout
@@ -128,6 +129,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="2dp"
+            android:visibility="gone"
             android:gravity="center">
 
             <ImageView
