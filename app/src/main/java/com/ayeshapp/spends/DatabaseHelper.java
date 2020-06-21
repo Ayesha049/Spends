@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllData(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_DATE + " LIKE " + "'%" + date + "%'";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_DATE + " LIKE " + "'%" + date + "%' ORDER BY ID ASC";
         Cursor res = db.rawQuery(selectQuery,null);
         return res;
     }
