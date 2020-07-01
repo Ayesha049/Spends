@@ -2,6 +2,7 @@ package com.ayeshapp.spends.ViewModels;
 
 import android.app.Application;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class SpendViewModel extends AndroidViewModel {
@@ -21,16 +23,21 @@ public class SpendViewModel extends AndroidViewModel {
     MutableLiveData<List<SpendModel>> spends;
     DatabaseHelper helper;
 
+    HashMap<String, MutableLiveData<List<SpendModel>>> mymap;
+
     public SpendViewModel(@NonNull Application application) {
         super(application);
         init();
 
         Date date = Calendar.getInstance().getTime();
+        String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1);
+        String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         String today = sf.format(date);
         helper = new DatabaseHelper(application.getApplicationContext());
 
         spends.setValue(getAll(today));
+        fetchData(year,month);
 
     }
 
@@ -39,11 +46,16 @@ public class SpendViewModel extends AndroidViewModel {
             spends = new MutableLiveData<>();
             List<SpendModel> list = new ArrayList<>();
             spends.setValue(list);
+            mymap = new HashMap<>();
         }
     }
 
     public MutableLiveData<List<SpendModel>> getSpends() {
         return spends;
+    }
+
+    public MutableLiveData<List<SpendModel>> getSpend(String date) {
+        return mymap.get(date);
     }
 
 
@@ -64,5 +76,19 @@ public class SpendViewModel extends AndroidViewModel {
         }
         return list;
         //adapter.notifyDataSetChanged();
+    }
+
+    private void fetchData(String y, String m) {
+        Cursor res = helper.getDataMonthly(y,m);
+        if(res.getCount() == 0) {
+            return;
+        }
+        while (res.moveToNext()) {
+            String date = res.getString(0);
+            List<SpendModel> list= getAll(date);
+            MutableLiveData<List<SpendModel>> lst = new MutableLiveData<>();
+            lst.setValue(list);
+            mymap.put(date,lst);
+        }
     }
 }
