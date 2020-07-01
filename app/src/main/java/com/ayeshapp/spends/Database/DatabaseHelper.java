@@ -1,4 +1,4 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Database;
 
 import android.content.ContentValues;
 import android.content.Context;

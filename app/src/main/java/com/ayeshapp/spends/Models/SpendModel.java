@@ -1,4 +1,4 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Models;
 
 public class SpendModel {
     Long id;

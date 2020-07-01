@@ -1,4 +1,6 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Models;
+
+import com.ayeshapp.spends.Models.SpendModel;
 
 import java.util.ArrayList;
 

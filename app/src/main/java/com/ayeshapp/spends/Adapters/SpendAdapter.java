@@ -1,4 +1,4 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ayeshapp.spends.Models.SpendModel;
+import com.ayeshapp.spends.Interfaces.OnSpendItemClick;
+import com.ayeshapp.spends.R;
 
 import java.util.ArrayList;
 

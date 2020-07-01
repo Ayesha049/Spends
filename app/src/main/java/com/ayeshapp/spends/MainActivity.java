@@ -11,16 +11,21 @@ import android.database.Cursor;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.ayeshapp.spends.Adapters.SpendAdapter;
+import com.ayeshapp.spends.Database.DatabaseHelper;
+import com.ayeshapp.spends.Interfaces.OnSpendItemClick;
+import com.ayeshapp.spends.Models.SpendModel;
+import com.ayeshapp.spends.ViewModels.SpendViewModel;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,10 +48,9 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
+public class MainActivity extends AppCompatActivity implements OnSpendItemClick {
 
     CalendarView calender;
 
@@ -75,11 +79,15 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
 
     ImageView upArrow, downArrow;
 
+    private SpendViewModel viewModel;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        viewModel = new ViewModelProvider(this).get(SpendViewModel.class);
 
         statistics = findViewById(R.id.statistics);
         statistics.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +128,15 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick{
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         date = sdf.format(Calendar.getInstance().getTime());
         //Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();
-        viewAll(date);
+        //viewAll(date);
+        viewModel.getSpends().observe(this, new Observer<List<SpendModel>>() {
+            @Override
+            public void onChanged(List<SpendModel> spendModels) {
+                list.clear();
+                list.addAll(spendModels);
+                adapter.notifyDataSetChanged();
+            }
+        });
         total.setText(String.format("%.2f", totalCost));
 
         calender.setOnDayClickListener(new OnDayClickListener() {

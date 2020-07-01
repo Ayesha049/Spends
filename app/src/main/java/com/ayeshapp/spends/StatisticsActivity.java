@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.widget.TableLayout;
 
+import com.ayeshapp.spends.Adapters.ViewPagerAdapter;
+import com.ayeshapp.spends.Fragments.FragmentMonthly;
+import com.ayeshapp.spends.Fragments.FragmentPeriodically;
+import com.ayeshapp.spends.Fragments.FragmentWeekly;
+import com.ayeshapp.spends.Fragments.FragmentYearly;
 import com.google.android.material.tabs.TabLayout;
 
 public class StatisticsActivity extends AppCompatActivity {

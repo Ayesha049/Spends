@@ -1,15 +1,17 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ayeshapp.spends.Models.OuterModel;
+import com.ayeshapp.spends.R;
 
 import java.util.ArrayList;
 

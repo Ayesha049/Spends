@@ -1,4 +1,4 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Fragments;
 
 import android.app.DatePickerDialog;
 import android.database.Cursor;
@@ -16,7 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
+import com.ayeshapp.spends.Adapters.OuterAdapter;
+import com.ayeshapp.spends.Database.DatabaseHelper;
+import com.ayeshapp.spends.Models.SpendModel;
+import com.ayeshapp.spends.Models.OuterModel;
+import com.ayeshapp.spends.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.ayeshapp.spends;
+package com.ayeshapp.spends.Adapters;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
