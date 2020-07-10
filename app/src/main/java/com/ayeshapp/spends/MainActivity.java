@@ -128,15 +128,8 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         date = sdf.format(Calendar.getInstance().getTime());
         //Toast.makeText(MainActivity.this, date, Toast.LENGTH_LONG).show();
-        //viewAll(date);
-        viewModel.getSpends().observe(this, new Observer<List<SpendModel>>() {
-            @Override
-            public void onChanged(List<SpendModel> spendModels) {
-                list.clear();
-                list.addAll(spendModels);
-                adapter.notifyDataSetChanged();
-            }
-        });
+        viewAll(date);
+        adapter.notifyDataSetChanged();
         total.setText(String.format("%.2f", totalCost));
 
         calender.setOnDayClickListener(new OnDayClickListener() {
@@ -374,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
 
     public void showDeleteDiolog(final int pos)
     {
-        showAlertDialog(MainActivity.this, "Sure to Delete this Item?", "Yes", "No", new DialogInterface.OnClickListener() {
+        showAlertDialog(MainActivity.this, "Sure to delete this item?", "Yes", "No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == DialogInterface.BUTTON_POSITIVE) {
