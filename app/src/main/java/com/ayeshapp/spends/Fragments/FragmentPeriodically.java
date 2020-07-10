@@ -82,7 +82,7 @@ public class FragmentPeriodically extends Fragment {
         //recyclerview
         //dates = new ArrayList<>();
         models = new ArrayList<>();
-        adapter = new OuterAdapter(models);
+        adapter = new OuterAdapter(models,getContext());
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

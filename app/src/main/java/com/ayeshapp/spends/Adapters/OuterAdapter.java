@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ayeshapp.spends.Models.OuterModel;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 
 public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> {
     ArrayList<OuterModel> list;
-    //OnSpendItemClick onSpendItemClick;
+    Context context;
 
-    public OuterAdapter(ArrayList<OuterModel> list) {//, OnSpendItemClick onSpendItemClick) {
+    public OuterAdapter(ArrayList<OuterModel> list, Context context) {
         this.list = list;
-        //this.onSpendItemClick = onSpendItemClick;
+        this.context = context;
     }
 
     @NonNull
@@ -31,7 +32,6 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View contactView = inflater.inflate(R.layout.layout_row_outer, viewGroup, false);
-        //return new SpendAdapter.viewHolder(contactView, onSpendItemClick);
         return new OuterAdapter.viewHolder(contactView);
     }
 
@@ -41,6 +41,10 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
         OuterModel model = list.get(i);
         viewHolder.date.setText(model.getDate());
         viewHolder.total.setText(model.getTotal().toString());
+
+        InnerAdapter adapter = new InnerAdapter(model.getList());
+        viewHolder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        viewHolder.recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -51,29 +55,15 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
     public class viewHolder extends RecyclerView.ViewHolder{
 
         TextView date, total;
+        RecyclerView recyclerView;
 
-        //LinearLayout invisibleLayout;
-
-        //OnSpendItemClick onSpendItemClick;
-
-        public viewHolder(@NonNull View itemView) {//, final OnSpendItemClick onSpendItemClick) {
+        public viewHolder(@NonNull View itemView) {
             super(itemView);
 
             date = itemView.findViewById(R.id.date);
             total = itemView.findViewById(R.id.total);
+            recyclerView = itemView.findViewById(R.id.inner_recyclerview);
 
-            /*invisibleLayout = itemView.findViewById(R.id.invisible_layout);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(invisibleLayout.getVisibility() == View.GONE) {
-                        invisibleLayout.setVisibility(View.VISIBLE);
-                    } else {
-                        invisibleLayout.setVisibility(View.GONE);
-                    }
-                }
-            });*/
         }
     }
 }

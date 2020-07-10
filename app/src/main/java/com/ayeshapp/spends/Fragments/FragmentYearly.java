@@ -64,7 +64,7 @@ public class FragmentYearly extends Fragment {
         String year = String.valueOf(yr);
 
         models = new ArrayList<>();
-        adapter = new OuterAdapter(models);
+        adapter = new OuterAdapter(models,getContext());
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
