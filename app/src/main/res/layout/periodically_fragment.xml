@@ -27,7 +27,7 @@
                     android:text="Start date"
                     android:layout_margin="4dp"
                     android:padding="2dp"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/_12sdp"/>
 
             </LinearLayout>
 
@@ -42,7 +42,7 @@
                     android:text="Finish date"
                     android:layout_margin="4dp"
                     android:padding="2dp"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/_12sdp"/>
 
             </LinearLayout>
 
@@ -67,7 +67,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
-                    android:hint="1/06/2020"
+                    android:hint="01-06-2020"
                     android:padding="6dp">
 
                 </TextView>
@@ -87,7 +87,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="4dp"
                     android:layout_marginLeft="4dp"
-                    android:hint="4/06/2020"
+                    android:hint="04-06-2020"
                     android:padding="6dp">
 
                 </TextView>

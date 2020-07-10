@@ -51,7 +51,7 @@
                 android:text="Statistics"
                 android:textColor="@color/colorPrimary"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:textSize="@dimen/_20sdp"
                 android:padding="8dp"
                 android:background="@drawable/light_imageview_pressed"/>
 
@@ -74,7 +74,7 @@
                     android:text="Total"
                     android:textStyle="bold"
                     android:textAllCaps="true"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_18sdp"
                     android:textColor="@color/colorText"
                     android:layout_marginLeft="8dp"/>
             </LinearLayout>
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="100"
                     android:gravity="end"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_18sdp"
                     android:textColor="@color/colorText"/>
 
                 <TextView
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Taka"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_18sdp"
                     android:textColor="@color/colorText"
                     android:layout_marginLeft="2dp"/>
             </LinearLayout>
