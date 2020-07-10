@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="Manage Your Daily Expenses"
         android:textColor="@color/colorText"
-        android:textSize="24sp"
+        android:textSize="@dimen/_20sdp"
         android:textStyle="italic"
         android:fontFamily="sans-serif-light"/>
 
