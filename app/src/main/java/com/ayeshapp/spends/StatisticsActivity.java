@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.ayeshapp.spends.Adapters.ViewPagerAdapter;
 import com.ayeshapp.spends.Fragments.FragmentMonthly;
 import com.ayeshapp.spends.Fragments.FragmentPeriodically;
-import com.ayeshapp.spends.Fragments.FragmentWeekly;
 import com.ayeshapp.spends.Fragments.FragmentYearly;
 import com.google.android.material.tabs.TabLayout;
 
@@ -26,7 +25,6 @@ public class StatisticsActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager_statistics);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentWeekly(),"Weekly");
         adapter.addFragment(new FragmentMonthly(),"Monthly");
         adapter.addFragment(new FragmentYearly(),"Yearly");
         adapter.addFragment(new FragmentPeriodically(),"Periodically");
