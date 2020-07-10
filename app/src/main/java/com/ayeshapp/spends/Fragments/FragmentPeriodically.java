@@ -87,6 +87,9 @@ public class FragmentPeriodically extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
+        fetchData();
+        adapter.notifyDataSetChanged();
+
         startEditDate = view.findViewById(R.id.start_date);
         startEditDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,16 +108,6 @@ public class FragmentPeriodically extends Fragment {
 
         startEditDate.setText(startDate);
         finishEditDate.setText(endDate);
-
-        show = view.findViewById(R.id.show_data);
-        show.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                models.clear();
-                fetchData();
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     private void showDatePicker(int pos) {
@@ -147,6 +140,9 @@ public class FragmentPeriodically extends Fragment {
             sMon = monthOfYear;
             sYear = year;
             startEditDate.setText(startDate);
+            models.clear();
+            fetchData();
+            adapter.notifyDataSetChanged();
         }
     };
 
@@ -160,6 +156,9 @@ public class FragmentPeriodically extends Fragment {
             eMon = monthOfYear;
             eYear = year;
             finishEditDate.setText(endDate);
+            models.clear();
+            fetchData();
+            adapter.notifyDataSetChanged();
         }
     };
 
