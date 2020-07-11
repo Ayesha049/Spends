@@ -15,7 +15,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="4dp">
+            android:layout_margin="@dimen/_4sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -31,9 +31,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Start date"
-                        android:layout_margin="4dp"
-                        android:padding="2dp"
-                        android:textSize="16sp"/>
+                        android:layout_margin="@dimen/_4sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:textSize="@dimen/_16sdp"/>
 
                 </LinearLayout>
 
@@ -46,9 +46,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Finish date"
-                        android:layout_margin="4dp"
-                        android:padding="2dp"
-                        android:textSize="16sp"/>
+                        android:layout_margin="@dimen/_4sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:textSize="@dimen/_16sdp"/>
 
                 </LinearLayout>
 
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="@dimen/_4sdp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -70,11 +70,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/edit_text_border"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
                         android:hint="1/06/2020"
-                        android:padding="6dp">
+                        android:padding="@dimen/_6sdp">
 
                     </TextView>
 
@@ -90,11 +90,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/edit_text_border"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
+                        android:layout_marginLeft="@dimen/_4sdp"
                         android:hint="4/06/2020"
-                        android:padding="6dp">
+                        android:padding="@dimen/_6sdp">
 
                     </TextView>
                 </LinearLayout>
@@ -111,7 +111,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="@dimen/_2sdp"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
 
