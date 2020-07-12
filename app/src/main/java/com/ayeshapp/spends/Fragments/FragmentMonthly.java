@@ -32,6 +32,8 @@ public class FragmentMonthly extends Fragment {
     DatabaseHelper mydb;
 
     Toolbar toolbar;
+    TextView monthlyTotal;
+    Double monthTotal = 0.0;
 
     ArrayList<OuterModel> models;
     RecyclerView recyclerView;
@@ -62,6 +64,8 @@ public class FragmentMonthly extends Fragment {
         toolbar = view.findViewById(R.id.toolbar);
         TextView header = toolbar.findViewById(R.id.heading);
 
+        monthlyTotal = view.findViewById(R.id.monthly_total);
+
         mn = cc.get(Calendar.MONTH);
         yr = cc.get(Calendar.YEAR);
 
@@ -78,6 +82,7 @@ public class FragmentMonthly extends Fragment {
 
         fetchData(year, mn+1);
         adapter.notifyDataSetChanged();
+        monthlyTotal.setText(String.format("%.2f", monthTotal));
 
 
         ImageView dec = toolbar.findViewById(R.id.left_arrow);
@@ -92,6 +97,7 @@ public class FragmentMonthly extends Fragment {
                 header.setText( months[mn] + " " + yr);
                 fetchData(String.valueOf(yr), mn+1);
                 adapter.notifyDataSetChanged();
+                monthlyTotal.setText(String.format("%.2f", monthTotal));
             }
         });
         ImageView inc = toolbar.findViewById(R.id.right_arrow);
@@ -106,11 +112,13 @@ public class FragmentMonthly extends Fragment {
                 header.setText( months[mn] + " " + yr);
                 fetchData(String.valueOf(yr), mn+1);
                 adapter.notifyDataSetChanged();
+                monthlyTotal.setText(String.format("%.2f", monthTotal));
             }
         });
     }
 
     void fetchData(String y, int mnn) {
+        monthTotal = 0.0;
         String m;
         if (mnn < 10) {
             m = "0" + String.valueOf(mnn);
@@ -125,7 +133,6 @@ public class FragmentMonthly extends Fragment {
         while (res.moveToNext()) {
             //dates.add(res.getString(1));
             viewAll(res.getString(0));
-            Log.i("testingM", res.getString(0));
         }
     }
 
@@ -147,9 +154,8 @@ public class FragmentMonthly extends Fragment {
                     res.getDouble(3),
                     res.getDouble(4)));
             total += res.getDouble(4);
-            //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
         }
-        Log.i("testingM", date + " ttl : " + total.toString());
+        monthTotal+=total;
         models.add(new OuterModel(date,total,model));
 
         //adapter.notifyDataSetChanged();

@@ -38,6 +38,9 @@ public class FragmentYearly extends Fragment {
     OuterAdapter adapter;
     int yr;
 
+    TextView yearlyTotal;
+    Double yearTotal = 0.0;
+
     public FragmentYearly() {
     }
 
@@ -59,6 +62,8 @@ public class FragmentYearly extends Fragment {
         toolbar = view.findViewById(R.id.toolbar);
         TextView header = toolbar.findViewById(R.id.heading);
 
+        yearlyTotal = view.findViewById(R.id.yearly_total);
+
         yr = cc.get(Calendar.YEAR);
 
         String year = String.valueOf(yr);
@@ -72,6 +77,7 @@ public class FragmentYearly extends Fragment {
         header.setText("YEAR " + year);
         fetchData(year);
         adapter.notifyDataSetChanged();
+        yearlyTotal.setText(String.format("%.2f", yearTotal));
 
         ImageView dec = toolbar.findViewById(R.id.left_arrow);
         dec.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +88,7 @@ public class FragmentYearly extends Fragment {
                 header.setText("YEAR " + String.valueOf(yr));
                 fetchData(String.valueOf(yr));
                 adapter.notifyDataSetChanged();
+                yearlyTotal.setText(String.format("%.2f", yearTotal));
             }
         });
         ImageView inc = toolbar.findViewById(R.id.right_arrow);
@@ -93,6 +100,7 @@ public class FragmentYearly extends Fragment {
                 header.setText("YEAR " + String.valueOf(yr));
                 fetchData(String.valueOf(yr));
                 adapter.notifyDataSetChanged();
+                yearlyTotal.setText(String.format("%.2f", yearTotal));
             }
         });
 
@@ -100,6 +108,7 @@ public class FragmentYearly extends Fragment {
 
 
     void fetchData(String y) {
+        yearTotal = 0.0;
         Cursor res = mydb.getDataYearly(y);
         if(res.getCount() == 0) {
             Log.i("testing", y + " no data");
@@ -130,9 +139,8 @@ public class FragmentYearly extends Fragment {
                     res.getDouble(3),
                     res.getDouble(4)));
             total += res.getDouble(4);
-            //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
         }
-        Log.i("testing", date + " totall : " + total.toString());
+        yearTotal+=total;
         models.add(new OuterModel(date,total,model));
 
         //adapter.notifyDataSetChanged();

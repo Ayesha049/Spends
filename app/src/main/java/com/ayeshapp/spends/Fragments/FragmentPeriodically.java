@@ -31,7 +31,8 @@ public class FragmentPeriodically extends Fragment {
     View view;
     TextView startEditDate;
     TextView finishEditDate;
-    Button show;
+    TextView periodicallyTotal;
+    Double periodTotal = 0.0;
 
     //ArrayList<String> dates;
     ArrayList<OuterModel> models;
@@ -64,6 +65,7 @@ public class FragmentPeriodically extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mydb = new DatabaseHelper(getContext());
+        periodicallyTotal = view.findViewById(R.id.periodically_total);
 
         Calendar cc = Calendar.getInstance();
         cc.setTimeZone(TimeZone.getDefault());
@@ -89,6 +91,7 @@ public class FragmentPeriodically extends Fragment {
 
         fetchData();
         adapter.notifyDataSetChanged();
+        periodicallyTotal.setText(String.format("%.2f", periodTotal));
 
         startEditDate = view.findViewById(R.id.start_date);
         startEditDate.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +146,7 @@ public class FragmentPeriodically extends Fragment {
             models.clear();
             fetchData();
             adapter.notifyDataSetChanged();
+            periodicallyTotal.setText(String.format("%.2f", periodTotal));
         }
     };
 
@@ -159,6 +163,7 @@ public class FragmentPeriodically extends Fragment {
             models.clear();
             fetchData();
             adapter.notifyDataSetChanged();
+            periodicallyTotal.setText(String.format("%.2f", periodTotal));
         }
     };
 
@@ -173,6 +178,7 @@ public class FragmentPeriodically extends Fragment {
     }
 
     void fetchData() {
+        periodTotal = 0.0;
         Cursor res = mydb.getDataPeriodically(startDate,endDate);
         if(res.getCount() == 0) {
             Log.i("testing", startDate + " " + endDate+ " no data");
@@ -187,7 +193,6 @@ public class FragmentPeriodically extends Fragment {
 
     public void viewAll(String date) {
         //list.clear();
-
         Cursor res = mydb.getAllData(date);
         if(res.getCount() == 0) {
             return;
@@ -203,9 +208,8 @@ public class FragmentPeriodically extends Fragment {
                     res.getDouble(3),
                     res.getDouble(4)));
             total += res.getDouble(4);
-            //Toast.makeText(MainActivity.this, res.getString(1),Toast.LENGTH_LONG).show();
         }
-        Log.i("testing", date + " toatl : " + total.toString());
+        periodTotal += total;
         models.add(new OuterModel(date,total,model));
 
         //adapter.notifyDataSetChanged();

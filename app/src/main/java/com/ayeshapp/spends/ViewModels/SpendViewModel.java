@@ -23,7 +23,7 @@ public class SpendViewModel extends AndroidViewModel {
     MutableLiveData<List<SpendModel>> spends;
     DatabaseHelper helper;
 
-    HashMap<String, MutableLiveData<List<SpendModel>>> mymap;
+    MutableLiveData<HashMap<String, List<SpendModel>>> mymap;
 
     public SpendViewModel(@NonNull Application application) {
         super(application);
@@ -46,7 +46,7 @@ public class SpendViewModel extends AndroidViewModel {
             spends = new MutableLiveData<>();
             List<SpendModel> list = new ArrayList<>();
             spends.setValue(list);
-            mymap = new HashMap<>();
+            mymap = new MutableLiveData<>();
         }
     }
 
@@ -54,8 +54,8 @@ public class SpendViewModel extends AndroidViewModel {
         return spends;
     }
 
-    public MutableLiveData<List<SpendModel>> getSpend(String date) {
-        return mymap.get(date);
+    public List<SpendModel> getSpend(String date) {
+        return mymap.getValue().get(date);
     }
 
 
@@ -86,9 +86,7 @@ public class SpendViewModel extends AndroidViewModel {
         while (res.moveToNext()) {
             String date = res.getString(0);
             List<SpendModel> list= getAll(date);
-            MutableLiveData<List<SpendModel>> lst = new MutableLiveData<>();
-            lst.setValue(list);
-            mymap.put(date,lst);
+            mymap.getValue().put(date,list);
         }
     }
 }
