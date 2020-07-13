@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,6 +57,7 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
 
         TextView date, total;
         RecyclerView recyclerView;
+        RelativeLayout layout;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +65,19 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
             date = itemView.findViewById(R.id.date);
             total = itemView.findViewById(R.id.total);
             recyclerView = itemView.findViewById(R.id.inner_recyclerview);
+            recyclerView.setVisibility(View.GONE);
+
+            layout = itemView.findViewById(R.id.outer_layout);
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recyclerView.getVisibility() == View.VISIBLE) {
+                        recyclerView.setVisibility(View.GONE);
+                    } else {
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
 
         }
     }
