@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -59,6 +60,8 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
         RecyclerView recyclerView;
         RelativeLayout layout;
 
+        ImageView down, up;
+
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -66,6 +69,8 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
             total = itemView.findViewById(R.id.total);
             recyclerView = itemView.findViewById(R.id.inner_recyclerview);
             recyclerView.setVisibility(View.GONE);
+            down = itemView.findViewById(R.id.down_arrow);
+            up = itemView.findViewById(R.id.up_arrow);
 
             layout = itemView.findViewById(R.id.outer_layout);
             layout.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +78,12 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.viewHolder> 
                 public void onClick(View view) {
                     if(recyclerView.getVisibility() == View.VISIBLE) {
                         recyclerView.setVisibility(View.GONE);
+                        down.setVisibility(View.VISIBLE);
+                        up.setVisibility(View.GONE);
                     } else {
                         recyclerView.setVisibility(View.VISIBLE);
+                        down.setVisibility(View.GONE);
+                        up.setVisibility(View.VISIBLE);
                     }
                 }
             });
