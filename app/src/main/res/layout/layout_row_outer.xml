@@ -62,7 +62,7 @@
                 android:id="@+id/down_arrow"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:src="@drawable/down_arrow"
                 android:background="@drawable/primary_textview_pressed"/>
 
@@ -70,7 +70,7 @@
                 android:id="@+id/up_arrow"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:src="@drawable/up_arrow"
                 android:background="@drawable/primary_textview_pressed"/>
 
