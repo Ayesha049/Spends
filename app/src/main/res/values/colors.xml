@@ -7,6 +7,7 @@
     <color name="colorNegButton">#DFDEDE</color>
     <color name="colorBorderLine">#AC8E8A</color>
     <color name="colorText">#ffff</color>
+    <color name="colorButton">#FFF2F2</color>
     <color name="colorTabIndicator">#EAEAEA</color>
     <color name="colorSegmentBackground">#ECECEC</color>
     <color name="colorHighlight">#BE2AD6</color>

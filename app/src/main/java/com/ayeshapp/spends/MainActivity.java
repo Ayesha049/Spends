@@ -156,14 +156,14 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
             }
         });
 
-        fab = findViewById(R.id.myFAB);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-
-        });
+//        fab = findViewById(R.id.myFAB);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDialog();
+//            }
+//
+//        });
 
         upArrow = findViewById(R.id.up_arrow);
         downArrow = findViewById(R.id.down_arrow);

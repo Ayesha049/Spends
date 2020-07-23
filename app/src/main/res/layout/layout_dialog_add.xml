@@ -4,78 +4,85 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-        <EditText
+        <TextView
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:hint="Item"
-            android:background="@drawable/edit_text_border"
+            android:text="Choose to Add"
+            android:textSize="@dimen/_13sdp"
             android:padding="6dp"
-            android:layout_marginTop="8dp"/>
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="8dp"
+            android:gravity="center"/>
 
-        <EditText
+        <TextView
             android:id="@+id/item_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:inputType="number|numberDecimal"
-            android:hint="Quantity (KG)"
+            android:text="Add Expenses"
+            android:textColor="@color/colorPrimary"
             android:background="@drawable/edit_text_border"
+            android:textSize="@dimen/_13sdp"
             android:padding="6dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:gravity="center"/>
 
-        <EditText
+        <TextView
             android:id="@+id/item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:inputType="number|numberDecimal"
-            android:hint="Price"
+            android:textSize="@dimen/_13sdp"
+            android:text="Add Income"
+            android:textColor="@color/colorPrimary"
             android:background="@drawable/edit_text_border"
             android:padding="6dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:gravity="center"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_margin="8dp">-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".7">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight=".7">-->
 
-                        <Button
-                            android:id="@+id/btn_cancel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cancel"
-                            android:background="@drawable/custom_neg_button"
-                            android:layout_margin="2dp"/>
+<!--                        <Button-->
+<!--                            android:id="@+id/btn_cancel"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Cancel"-->
+<!--                            android:background="@drawable/custom_neg_button"-->
+<!--                            android:layout_margin="2dp"/>-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".2">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight=".2">-->
 
-                        <Button
-                            android:id="@+id/btn_add"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Add"
-                            android:textColor="#ffff"
-                            android:background="@drawable/custom_button"
-                            android:layout_margin="2dp"/>
+<!--                        <Button-->
+<!--                            android:id="@+id/btn_add"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Add"-->
+<!--                            android:textColor="#ffff"-->
+<!--                            android:background="@drawable/custom_button"-->
+<!--                            android:layout_margin="2dp"/>-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 </LinearLayout>
