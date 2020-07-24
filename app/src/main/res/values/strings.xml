@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Spends</string>
+
+    <string-array name="Catagory">
+        <item>Grocery</item>
+        <item>Transportation</item>
+        <item>Education</item>
+        <item>Health</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="CatagoryIncome">
+        <item>Salary</item>
+        <item>Savings</item>
+        <item>Others</item>
+    </string-array>
 </resources>

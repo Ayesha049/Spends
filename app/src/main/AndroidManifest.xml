@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StatisticsActivity"></activity>
-        <activity android:name=".Statistics"></activity>
+        <activity android:name=".AddIncomeActivity"></activity>
+        <activity android:name=".AddExpenseActivity" />
+        <activity android:name=".AddExpenseActivirty" />
+        <activity android:name=".StatisticsActivity" />
+        <activity android:name=".Statistics" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

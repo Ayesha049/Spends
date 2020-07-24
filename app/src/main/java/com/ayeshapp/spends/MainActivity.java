@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         amount = dialog.findViewById(R.id.item_quantity);
         price = dialog.findViewById(R.id.item_price);
 
-        add = dialog.findViewById(R.id.btn_add);
+       // add = dialog.findViewById(R.id.btn_add);
         add.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
             }
         });
 
-        cancel = dialog.findViewById(R.id.btn_cancel);
+        //cancel = dialog.findViewById(R.id.btn_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
 
 
 
-        add = dialog.findViewById(R.id.btn_add);
+       // add = dialog.findViewById(R.id.btn_add);
         add.setText("UPDATE");
         add.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
             }
         });
 
-        cancel = dialog.findViewById(R.id.btn_cancel);
+        //cancel = dialog.findViewById(R.id.btn_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
