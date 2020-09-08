@@ -37,6 +37,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,9 +62,8 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
     Button cancel;
     TextView total;
     RecyclerView recyclerView;
-    FloatingActionButton fab;
 
-    TextView statistics;
+    LinearLayout statistics, addItem;
 
     ArrayList<SpendModel> list;
     SpendAdapter adapter;
@@ -156,14 +156,14 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
             }
         });
 
-//        fab = findViewById(R.id.myFAB);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDialog();
-//            }
-//
-//        });
+        addItem = findViewById(R.id.add_item);
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+
+        });
 
         upArrow = findViewById(R.id.up_arrow);
         downArrow = findViewById(R.id.down_arrow);
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         price = dialog.findViewById(R.id.item_price);
 
        // add = dialog.findViewById(R.id.btn_add);
-        add.setOnClickListener(new View.OnClickListener() {
+        /*add.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
@@ -230,15 +230,15 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
                     calender.setHighlightedDays(cals);
                 }
             }
-        });
+        });*/
 
         //cancel = dialog.findViewById(R.id.btn_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        /*cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
-        });
+        });*/
 
         dialog.show();
     }
