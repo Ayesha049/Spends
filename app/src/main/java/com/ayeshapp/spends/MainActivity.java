@@ -200,9 +200,12 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         window.setAttributes(wlp);
 
-        name = dialog.findViewById(R.id.item_name);
-        amount = dialog.findViewById(R.id.item_quantity);
-        price = dialog.findViewById(R.id.item_price);
+        TextView addExpense, addIncome;
+        addExpense = dialog.findViewById(R.id.add_expense);
+        addExpense.setOnClickListener(v -> {
+
+        });
+        addIncome = dialog.findViewById(R.id.add_income);
 
        // add = dialog.findViewById(R.id.btn_add);
         /*add.setOnClickListener(new View.OnClickListener() {
@@ -243,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         dialog.show();
     }
 
-    public void showEditDialog(int pos) {
+    /*public void showEditDialog(int pos) {
         final Dialog dialog = new Dialog(MainActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dialog_add);
@@ -303,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         });
 
         dialog.show();
-    }
+    }*/
 
 
     public void viewAll(String date) {
@@ -390,7 +393,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
     @Override
     public void onEditClicked(int pos) {
         //Toast.makeText(MainActivity.this, "edit clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
-        showEditDialog(pos);
+        //showEditDialog(pos);
     }
 
     @SuppressLint("SetTextI18n")

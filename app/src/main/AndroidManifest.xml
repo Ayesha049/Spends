@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddIncomeActivity"></activity>
-        <activity android:name=".AddExpenseActivity" />
-        <activity android:name=".AddExpenseActivirty" />
         <activity android:name=".StatisticsActivity" />
-        <activity android:name=".Statistics" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
