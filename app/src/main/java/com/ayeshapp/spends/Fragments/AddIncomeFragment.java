@@ -18,10 +18,10 @@ import com.ayeshapp.spends.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddExpenseFragment#newInstance} factory method to
+ * Use the {@link AddIncomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddExpenseFragment extends Fragment {
+public class AddIncomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +32,11 @@ public class AddExpenseFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    OnCloseListener listener;
+    OnIncomeCloseListener listener;
+
+    public AddIncomeFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -40,7 +44,7 @@ public class AddExpenseFragment extends Fragment {
 
         try
         {
-            listener = (OnCloseListener) context;
+            listener = (OnIncomeCloseListener) context;
 
         }
         catch (ClassCastException e)
@@ -50,12 +54,8 @@ public class AddExpenseFragment extends Fragment {
         }
     }
 
-    public AddExpenseFragment() {
-        // Required empty public constructor
-    }
-
-    public static AddExpenseFragment newInstance() {
-        AddExpenseFragment fragment = new AddExpenseFragment();
+    public static AddIncomeFragment newInstance() {
+        AddIncomeFragment fragment = new AddIncomeFragment();
         /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -76,25 +76,24 @@ public class AddExpenseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_expense, container, false);
+        return inflater.inflate(R.layout.fragment_add_income, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Spinner catagotySpinner = (Spinner) view.findViewById(R.id.catagory_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Catagory) );
+        Spinner catagotyIncomeSpinner = view.findViewById(R.id.catagory_income_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.CatagoryIncome) );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        catagotySpinner.setAdapter(adapter);
+        catagotyIncomeSpinner.setAdapter(adapter);
 
         Button close = view.findViewById(R.id.item_cancel);
         close.setOnClickListener(v -> {
-            listener.onCloseClicked();
+            listener.onIncomeCloseClicked();
         });
-
     }
 
-    public interface OnCloseListener{
-        public void onCloseClicked();
+    public interface OnIncomeCloseListener{
+        public void onIncomeCloseClicked();
     }
 }

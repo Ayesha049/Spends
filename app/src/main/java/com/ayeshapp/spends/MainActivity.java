@@ -13,6 +13,8 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.ayeshapp.spends.Adapters.SpendAdapter;
 import com.ayeshapp.spends.Database.DatabaseHelper;
+import com.ayeshapp.spends.Fragments.AddExpenseFragment;
+import com.ayeshapp.spends.Fragments.AddIncomeFragment;
 import com.ayeshapp.spends.Interfaces.OnSpendItemClick;
 import com.ayeshapp.spends.Models.SpendModel;
 import com.ayeshapp.spends.ViewModels.SpendViewModel;
@@ -24,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +40,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -51,7 +56,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnSpendItemClick {
+public class MainActivity extends AppCompatActivity implements OnSpendItemClick, AddExpenseFragment.OnCloseListener, AddIncomeFragment.OnIncomeCloseListener {
 
     CalendarView calender;
 
@@ -79,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
 
     ImageView upArrow, downArrow;
 
+    FrameLayout container;
+    Fragment addExpenseFragment, addIncomeFragment;
+
     private SpendViewModel viewModel;
 
     @SuppressLint("SetTextI18n")
@@ -86,6 +94,9 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        container = findViewById(R.id.fragment_container);
+        addExpenseFragment = AddExpenseFragment.newInstance();
+        addIncomeFragment = AddIncomeFragment.newInstance();
 
         viewModel = new ViewModelProvider(this).get(SpendViewModel.class);
 
@@ -201,11 +212,23 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
         window.setAttributes(wlp);
 
         TextView addExpense, addIncome;
+
         addExpense = dialog.findViewById(R.id.add_expense);
         addExpense.setOnClickListener(v -> {
-
+            dialog.dismiss();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, addExpenseFragment);
+            ft.commit();
+            container.setVisibility(View.VISIBLE);
         });
         addIncome = dialog.findViewById(R.id.add_income);
+        addIncome.setOnClickListener(v -> {
+            dialog.dismiss();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, addIncomeFragment);
+            ft.commit();
+            container.setVisibility(View.VISIBLE);
+        });
 
        // add = dialog.findViewById(R.id.btn_add);
         /*add.setOnClickListener(new View.OnClickListener() {
@@ -401,5 +424,21 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick 
     public void onDeleteClicked(int pos) {
         //Toast.makeText(MainActivity.this, "delete clicked" + Integer.toString(pos),Toast.LENGTH_LONG).show();
         showDeleteDiolog(pos);
+    }
+
+    @Override
+    public void onCloseClicked() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(addExpenseFragment);
+        ft.commit();
+        container.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onIncomeCloseClicked() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.remove(addIncomeFragment);
+        ft.commit();
+        container.setVisibility(View.GONE);
     }
 }

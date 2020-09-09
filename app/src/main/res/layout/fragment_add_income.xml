@@ -3,21 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.AddExpenseFragment">
+    tools:context=".Fragments.AddIncomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/add_daily_expense_item_layout"
+            android:id="@+id/add_monthly_income_item_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" Add Daily Expense Item"
+                android:text=" Add Monthly Income"
                 android:textSize="@dimen/_16sdp"
                 android:background="@color/colorPrimary"
                 android:textColor="@color/colorText"
@@ -26,8 +26,8 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@id/add_daily_expense_item_layout"
-            android:id="@+id/category_layout"
+            android:layout_below="@id/add_monthly_income_item_layout"
+            android:id="@+id/category_income_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -57,7 +57,7 @@
                     android:layout_weight="0.65">
 
                     <Spinner
-                        android:id="@+id/catagory_spinner"
+                        android:id="@+id/catagory_income_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -72,14 +72,14 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/item_layout"
-            android:layout_below="@+id/category_layout"
+            android:id="@+id/amount_layout"
+            android:layout_below="@+id/category_income_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/item_name"
-                android:hint="Item"
+                android:id="@+id/amount_name"
+                android:hint="Amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -91,29 +91,29 @@
                 android:layout_marginTop="8dp"/>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/cost_layout"
-            android:layout_below="@+id/item_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--    <RelativeLayout-->
+        <!--        android:id="@+id/cost_layout"-->
+        <!--        android:layout_below="@+id/item_layout"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content">-->
 
-            <EditText
-                android:id="@+id/item_price"
-                android:hint="Cost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimary"
-                android:background="@drawable/edit_text_border"
-                android:textSize="@dimen/_13sdp"
-                android:padding="6dp"
-                android:layout_marginTop="8dp"/>
-        </RelativeLayout>
+        <!--        <EditText-->
+        <!--            android:id="@+id/item_price"-->
+        <!--            android:hint="Cost"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginLeft="8dp"-->
+        <!--            android:layout_marginRight="8dp"-->
+        <!--            android:textColor="@color/colorPrimary"-->
+        <!--            android:background="@drawable/edit_text_border"-->
+        <!--            android:textSize="@dimen/_13sdp"-->
+        <!--            android:padding="6dp"-->
+        <!--            android:layout_marginTop="8dp"/>-->
+        <!--    </RelativeLayout>-->
 
         <RelativeLayout
-            android:id="@+id/receipt_layout"
-            android:layout_below="@+id/cost_layout"
+            android:id="@+id/income_receipt_layout"
+            android:layout_below="@+id/amount_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -125,12 +125,12 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3">
+                    android:layout_weight="0.6">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add receipt"
+                        android:text="Add income receipt"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/_13sdp"
                         android:layout_marginTop="8dp"
@@ -156,12 +156,12 @@
 
         </RelativeLayout>
         <RelativeLayout
-            android:layout_below="@+id/receipt_layout"
+            android:layout_below="@+id/income_receipt_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/receipt"
+                android:id="@+id/income_receipt"
                 android:src="@drawable/ic_launcher_background"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp"/>
