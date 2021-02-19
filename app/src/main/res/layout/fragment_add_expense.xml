@@ -17,19 +17,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" Add Daily Expense Item"
-                android:textSize="@dimen/_16sdp"
                 android:background="@color/colorPrimary"
+                android:padding="@dimen/_4sdp"
+                android:text=" Add Daily Expense Item"
                 android:textColor="@color/colorText"
-                android:padding="@dimen/_4sdp"/>
+                android:textSize="@dimen/_16sdp" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@id/add_daily_expense_item_layout"
             android:id="@+id/category_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_daily_expense_item_layout">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,14 +44,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:text="Choose Category"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_13sdp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginBottom="8dp"/>
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -61,8 +63,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginRight="8dp"/>
+                        android:background="@drawable/edit_text_border" />
 
                 </LinearLayout>
 
@@ -73,49 +76,50 @@
 
         <RelativeLayout
             android:id="@+id/item_layout"
-            android:layout_below="@+id/category_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/category_layout">
 
             <EditText
                 android:id="@+id/item_name"
-                android:hint="Item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimary"
                 android:background="@drawable/edit_text_border"
-                android:textSize="@dimen/_13sdp"
+                android:hint="Item"
                 android:padding="6dp"
-                android:layout_marginTop="8dp"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/cost_layout"
-            android:layout_below="@+id/item_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_layout">
 
             <EditText
                 android:id="@+id/item_price"
-                android:hint="Cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimary"
                 android:background="@drawable/edit_text_border"
-                android:textSize="@dimen/_13sdp"
+                android:hint="Cost"
+                android:inputType="number"
                 android:padding="6dp"
-                android:layout_marginTop="8dp"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/receipt_layout"
-            android:layout_below="@+id/cost_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cost_layout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,41 +134,44 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:text="Add receipt"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_13sdp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginBottom="8dp"/>
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.9">
 
                     <ImageView
+                        android:id="@+id/imageViewAddExpenseReceipt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_camera_alt_24"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/ic_baseline_camera_alt_24" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </RelativeLayout>
+
         <RelativeLayout
-            android:layout_below="@+id/receipt_layout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/receipt_layout">
 
             <ImageView
-                android:id="@+id/receipt"
-                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/imageViewExpenseReceipt"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"/>
+                android:layout_height="@dimen/_120sdp"
+                android:src="@drawable/ic_launcher_background" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -176,8 +183,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_2sdp">
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="horizontal">
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -185,16 +195,17 @@
                     android:layout_weight="1">
 
                     <Button
+                        android:id="@+id/save_item_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Save"
-                        android:textSize="@dimen/_13sdp"
-                        android:textColor="@color/colorText"
-                        android:textAllCaps="false"
-                        android:layout_marginLeft="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_marginRight="@dimen/_2sdp"
-                        android:background="@drawable/custom_button"/>
-
+                        android:background="@drawable/custom_button"
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorText"
+                        android:textSize="@dimen/_13sdp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -206,15 +217,16 @@
                         android:id="@+id/item_cancel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:background="@drawable/custom_neg_button"
                         android:text="Cancel"
-                        android:textSize="@dimen/_13sdp"
-                        android:textColor="@color/colorPrimary"
+                        android:layout_marginEnd="@dimen/_6sdp"
                         android:textAllCaps="false"
-                        android:layout_marginRight="@dimen/_90sdp"
-                        android:layout_marginLeft="@dimen/_2sdp"
-                        android:background="@drawable/custom_neg_button"/>
-
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_13sdp" />
                 </LinearLayout>
+
+
             </LinearLayout>
 
         </RelativeLayout>

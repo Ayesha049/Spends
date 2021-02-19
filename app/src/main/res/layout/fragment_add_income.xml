@@ -60,6 +60,7 @@
                         android:id="@+id/catagory_income_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_border"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:layout_marginRight="8dp"/>
@@ -79,16 +80,17 @@
 
             <EditText
                 android:id="@+id/amount_name"
-                android:hint="Amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:textColor="@color/colorPrimary"
                 android:background="@drawable/edit_text_border"
-                android:textSize="@dimen/_13sdp"
+                android:hint="Amount"
+                android:inputType="number"
                 android:padding="6dp"
-                android:layout_marginTop="8dp"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_13sdp" />
         </RelativeLayout>
 
         <!--    <RelativeLayout-->
@@ -177,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_2sdp">
+                android:layout_marginBottom="@dimen/_6sdp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -191,8 +193,9 @@
                         android:textSize="@dimen/_13sdp"
                         android:textColor="@color/colorText"
                         android:textAllCaps="false"
-                        android:layout_marginLeft="@dimen/_90sdp"
-                        android:layout_marginRight="@dimen/_2sdp"
+                        android:layout_marginStart="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:paddingBottom="@dimen/_4sdp"
                         android:background="@drawable/custom_button"/>
 
                 </LinearLayout>
@@ -210,8 +213,8 @@
                         android:textSize="@dimen/_13sdp"
                         android:textColor="@color/colorPrimary"
                         android:textAllCaps="false"
-                        android:layout_marginRight="@dimen/_90sdp"
-                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
                         android:background="@drawable/custom_neg_button"/>
 
                 </LinearLayout>

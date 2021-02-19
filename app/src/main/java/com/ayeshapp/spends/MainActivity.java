@@ -216,6 +216,12 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick,
         addExpense = dialog.findViewById(R.id.add_expense);
         addExpense.setOnClickListener(v -> {
             dialog.dismiss();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("date", date);
+            AddExpenseFragment addExpenseFragment = new AddExpenseFragment();
+            addExpenseFragment.setArguments(bundle);
+
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, addExpenseFragment);
             ft.commit();
@@ -256,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick,
                     calender.setHighlightedDays(cals);
                 }
             }
-        });*/
+        });
 
         //cancel = dialog.findViewById(R.id.btn_cancel);
         /*cancel.setOnClickListener(new View.OnClickListener() {

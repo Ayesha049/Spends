@@ -83,8 +83,8 @@ public class AddIncomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Spinner catagotyIncomeSpinner = view.findViewById(R.id.catagory_income_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.CatagoryIncome) );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.custom_spinner_list_item, getResources().getStringArray(R.array.CatagoryIncome) );
+        adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown);
         catagotyIncomeSpinner.setAdapter(adapter);
 
         Button close = view.findViewById(R.id.item_cancel);
