@@ -36,84 +36,84 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_DATE + " TEXT," +
                 COL_ITEM_NAME + " TEXT," +
-                COL_ITEM_CATEGORY +" TEXT," +
-                COL_ITEM_PRICE +" REAL)");
+                COL_ITEM_CATEGORY + " TEXT," +
+                COL_ITEM_PRICE + " REAL)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
     public long insertExpenseData(String date, String itemName, String category, String price) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_DATE,date);
-        contentValues.put(COL_ITEM_NAME,itemName);
-        contentValues.put(COL_ITEM_NAME,category);
-        contentValues.put(COL_ITEM_PRICE,price);
-        long result = db.insert(TABLE_NAME,null ,contentValues);
+        contentValues.put(COL_DATE, date);
+        contentValues.put(COL_ITEM_NAME, itemName);
+        contentValues.put(COL_ITEM_NAME, category);
+        contentValues.put(COL_ITEM_PRICE, price);
+        long result = db.insert(TABLE_NAME, null, contentValues);
         return result;
     }
 
     public void updateExpenseData(String id, String date, String itemName, String category, String price) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("ID",id);
-        contentValues.put(COL_DATE,date);
-        contentValues.put(COL_ITEM_NAME,itemName);
-        contentValues.put(COL_ITEM_CATEGORY,category);
-        contentValues.put(COL_ITEM_PRICE,price);
-        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
+        contentValues.put("ID", id);
+        contentValues.put(COL_DATE, date);
+        contentValues.put(COL_ITEM_NAME, itemName);
+        contentValues.put(COL_ITEM_CATEGORY, category);
+        contentValues.put(COL_ITEM_PRICE, price);
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{id});
     }
 
-    public Integer deleteData (String id) {
+    public Integer deleteData(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
+        return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
     }
 
     public Cursor getAllData(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_DATE + " LIKE " + "'%" + date + "%' ORDER BY ID ASC";
-        Cursor res = db.rawQuery(selectQuery,null);
+        Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 
     public Cursor getDistincDates() {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME;
-        Cursor res = db.rawQuery(selectQuery,null);
+        Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 
     public Cursor getDataPeriodically(String s, String e) {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date('" +
-                                    s + "') AND date('" + e + "') ORDER BY date(" + COL_DATE + ") DESC" ;
+                s + "') AND date('" + e + "') ORDER BY date(" + COL_DATE + ") DESC";
         Log.i("query", selectQuery);
-        Cursor res = db.rawQuery(selectQuery,null);
+        Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 
     public Cursor getDataYearly(String s) {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE strftime('%Y', " +
-                COL_DATE + ") = '" + s + "' ORDER BY date(" + COL_DATE + ") DESC" ;
+                COL_DATE + ") = '" + s + "' ORDER BY date(" + COL_DATE + ") DESC";
         Log.i("query", selectQuery);
-        Cursor res = db.rawQuery(selectQuery,null);
+        Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 
     public Cursor getDataMonthly(String y, String m) {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE strftime('%m', date) = '" + m
-                                + "' and strftime('%Y', date) = '" + y + "' ORDER BY date(" + COL_DATE + ") DESC" ;
+                + "' and strftime('%Y', date) = '" + y + "' ORDER BY date(" + COL_DATE + ") DESC";
         Log.i("query", selectQuery);
-        Cursor res = db.rawQuery(selectQuery,null);
+        Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 }
