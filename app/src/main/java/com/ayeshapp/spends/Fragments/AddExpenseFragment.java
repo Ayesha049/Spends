@@ -56,6 +56,10 @@ public class AddExpenseFragment extends Fragment {
 
     private String currentPhotoPath;
     private ImageView addExpenseReceiptImageView, expenseRecieptImageView;
+    private Button close, saveItem;
+    private EditText itemNameEditText, itemCostEditText;
+    private Spinner categorySpinner;
+    private String category;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -120,39 +124,18 @@ public class AddExpenseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Spinner categotySpinner = (Spinner) view.findViewById(R.id.catagory_spinner);
+        categorySpinner = (Spinner) view.findViewById(R.id.catagory_spinner);
 
         databaseHelper = new DatabaseHelper(getContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.custom_spinner_list_item, getResources().getStringArray(R.array.Catagory) );
         adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown);
-        categotySpinner.setAdapter(adapter);
+        categorySpinner.setAdapter(adapter);
 
-        Button close = view.findViewById(R.id.item_cancel);
-        Button saveItem = view.findViewById(R.id.save_item_button);
-        EditText itemNameEditText = view.findViewById(R.id.item_name);
-        EditText itemCostEditText = view.findViewById(R.id.item_price);
-        String category = categotySpinner.getSelectedItem().toString();
-
-        saveItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String itemName = String.valueOf(itemNameEditText.getText());
-                String itemCost = String.valueOf(itemCostEditText.getText());
-
-                if (itemName.equals("") || itemCost.equals("") || category.equals("")) {
-                    Toast.makeText(getContext(), "Please fill all the fields.", Toast.LENGTH_LONG).show();
-                } else {
-                    databaseHelper.insertExpenseData(date, itemName, category, itemCost);
-                    listener.onCloseClicked();
-                }
-
-            }
-        });
-
-        close.setOnClickListener(v -> {
-            listener.onCloseClicked();
-        });
-
+        close = view.findViewById(R.id.item_cancel);
+        saveItem = view.findViewById(R.id.save_item_button);
+        itemNameEditText = view.findViewById(R.id.item_name);
+        itemCostEditText = view.findViewById(R.id.item_price);
+        category = categorySpinner.getSelectedItem().toString();
     }
 
     @Override
@@ -167,6 +150,25 @@ public class AddExpenseFragment extends Fragment {
             }
         });
 
+        saveItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String itemName = String.valueOf(itemNameEditText.getText());
+                String itemCost = String.valueOf(itemCostEditText.getText());
+
+                if (itemName.equals("") || itemCost.equals("") || category.equals("")) {
+                    Toast.makeText(getContext(), "Please fill all the fields.", Toast.LENGTH_LONG).show();
+                } else {
+                    databaseHelper.insertExpenseData(date, itemName, category, itemCost, currentPhotoPath);
+                    listener.onCloseClicked();
+                }
+
+            }
+        });
+
+        close.setOnClickListener(v -> {
+            listener.onCloseClicked();
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

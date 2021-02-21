@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_ITEM_NAME = "itemname";
     public static final String COL_DATE = "date";
     public static final String COL_ITEM_PRICE = "price";
+    public static final String COL_EXPENSE_RECEIPT = "expense_receipt";
 
     /*
     SELECT *
@@ -40,7 +41,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_DATE + " TEXT," +
                 COL_ITEM_NAME + " TEXT," +
                 COL_ITEM_CATEGORY + " TEXT," +
-                COL_ITEM_PRICE + " REAL)");
+                COL_ITEM_PRICE + " REAL," +
+                COL_EXPENSE_RECEIPT + " TEXT)");
     }
 
     @Override
@@ -49,13 +51,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insertExpenseData(String date, String itemName, String category, String price) {
+    public long insertExpenseData(String date, String itemName, String category, String price, String imagePath) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_DATE, date);
         contentValues.put(COL_ITEM_NAME, itemName);
-        contentValues.put(COL_ITEM_NAME, category);
+        contentValues.put(COL_ITEM_CATEGORY, category);
         contentValues.put(COL_ITEM_PRICE, price);
+        contentValues.put(COL_EXPENSE_RECEIPT, imagePath);
         long result = db.insert(TABLE_NAME, null, contentValues);
         return result;
     }
