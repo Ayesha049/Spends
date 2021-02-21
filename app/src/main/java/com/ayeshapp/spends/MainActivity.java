@@ -230,6 +230,12 @@ public class MainActivity extends AppCompatActivity implements OnSpendItemClick,
         addIncome = dialog.findViewById(R.id.add_income);
         addIncome.setOnClickListener(v -> {
             dialog.dismiss();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("date", date);
+            AddIncomeFragment addIncomeFragment = new AddIncomeFragment();
+            addIncomeFragment.setArguments(bundle);
+
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, addIncomeFragment);
             ft.commit();

@@ -51,7 +51,9 @@
                         android:layout_marginBottom="8dp"/>
 
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/spinnerIncomeCategory"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.65">
@@ -60,10 +62,10 @@
                         android:id="@+id/catagory_income_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edit_text_border"
                         android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginRight="8dp"/>
+                        android:background="@drawable/edit_text_border" />
 
                 </LinearLayout>
 
@@ -79,7 +81,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/amount_name"
+                android:id="@+id/editTextIncomeAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -146,11 +148,12 @@
                     android:layout_weight="0.9">
 
                     <ImageView
+                        android:id="@+id/imageViewAddIncomeReceipt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_camera_alt_24"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/ic_baseline_camera_alt_24" />
 
                 </LinearLayout>
 
@@ -163,7 +166,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/income_receipt"
+                android:id="@+id/imageViewIncomeReceipt"
                 android:src="@drawable/ic_launcher_background"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp"/>
@@ -187,16 +190,17 @@
                     android:layout_weight="1">
 
                     <Button
+                        android:id="@+id/buttonSaveIncome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Save"
-                        android:textSize="@dimen/_13sdp"
-                        android:textColor="@color/colorText"
-                        android:textAllCaps="false"
                         android:layout_marginStart="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
+                        android:background="@drawable/custom_button"
                         android:paddingBottom="@dimen/_4sdp"
-                        android:background="@drawable/custom_button"/>
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorText"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -206,7 +210,7 @@
                     android:layout_weight="1">
 
                     <Button
-                        android:id="@+id/item_cancel"
+                        android:id="@+id/buttonCancelIncome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Cancel"

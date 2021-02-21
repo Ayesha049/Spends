@@ -11,12 +11,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Spends.db";
     public static final int DATABASE_VERSION = 4;
 
-    public static final String TABLE_NAME = "Expense";
+    public static final String EXPENSE_TABLE = "Expense";
     public static final String COL_ITEM_CATEGORY = "category";
     public static final String COL_ITEM_NAME = "itemname";
     public static final String COL_DATE = "date";
     public static final String COL_ITEM_PRICE = "price";
     public static final String COL_EXPENSE_RECEIPT = "expense_receipt";
+
+    public static final String INCOME_TABLE= "Income";
+    public static final String COL_INCOME_CATEGORY = "income_category";
+    public static final String COL_INCOME_DATE = "income_date";
+    public static final String COL_INCOME_AMOUNT = "income_amount";
+    public static final String COL_INCOME_RECEIPT = "income_receipt";
+
 
     /*
     SELECT *
@@ -37,17 +44,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("create table " + EXPENSE_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_DATE + " TEXT," +
                 COL_ITEM_NAME + " TEXT," +
                 COL_ITEM_CATEGORY + " TEXT," +
                 COL_ITEM_PRICE + " REAL," +
                 COL_EXPENSE_RECEIPT + " TEXT)");
+
+        db.execSQL("create table " + INCOME_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COL_INCOME_DATE + " TEXT," +
+                COL_INCOME_CATEGORY + " TEXT," +
+                COL_INCOME_AMOUNT + " REAL," +
+                COL_INCOME_RECEIPT + " TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + EXPENSE_TABLE);
         onCreate(db);
     }
 
@@ -59,7 +72,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_ITEM_CATEGORY, category);
         contentValues.put(COL_ITEM_PRICE, price);
         contentValues.put(COL_EXPENSE_RECEIPT, imagePath);
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        long result = db.insert(EXPENSE_TABLE, null, contentValues);
+        return result;
+    }
+
+    public long insertIncomeData(String date, String categoryIncome, String amount, String imagePath) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_INCOME_DATE, date);
+        contentValues.put(COL_INCOME_CATEGORY, categoryIncome);
+        contentValues.put(COL_INCOME_AMOUNT, amount);
+        contentValues.put(COL_INCOME_RECEIPT, imagePath);
+        long result = db.insert(INCOME_TABLE, null, contentValues);
         return result;
     }
 
@@ -71,31 +95,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_ITEM_NAME, itemName);
         contentValues.put(COL_ITEM_CATEGORY, category);
         contentValues.put(COL_ITEM_PRICE, price);
-        db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{id});
+        db.update(EXPENSE_TABLE, contentValues, "ID = ?", new String[]{id});
     }
 
     public Integer deleteData(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
+        return db.delete(EXPENSE_TABLE, "ID = ?", new String[]{id});
     }
 
     public Cursor getAllData(String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_DATE + " LIKE " + "'%" + date + "%' ORDER BY ID ASC";
+        String selectQuery = "SELECT * FROM " + EXPENSE_TABLE + " WHERE " + COL_DATE + " LIKE " + "'%" + date + "%' ORDER BY ID ASC";
         Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 
     public Cursor getDistincDates() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME;
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + EXPENSE_TABLE;
         Cursor res = db.rawQuery(selectQuery, null);
         return res;
     }
 
     public Cursor getDataPeriodically(String s, String e) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE date(" + COL_DATE + ") BETWEEN date('" +
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + EXPENSE_TABLE + " WHERE date(" + COL_DATE + ") BETWEEN date('" +
                 s + "') AND date('" + e + "') ORDER BY date(" + COL_DATE + ") DESC";
         Log.i("query", selectQuery);
         Cursor res = db.rawQuery(selectQuery, null);
@@ -104,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataYearly(String s) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE strftime('%Y', " +
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + EXPENSE_TABLE + " WHERE strftime('%Y', " +
                 COL_DATE + ") = '" + s + "' ORDER BY date(" + COL_DATE + ") DESC";
         Log.i("query", selectQuery);
         Cursor res = db.rawQuery(selectQuery, null);
@@ -113,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataMonthly(String y, String m) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + TABLE_NAME + " WHERE strftime('%m', date) = '" + m
+        String selectQuery = "SELECT DISTINCT " + COL_DATE + " FROM " + EXPENSE_TABLE + " WHERE strftime('%m', date) = '" + m
                 + "' and strftime('%Y', date) = '" + y + "' ORDER BY date(" + COL_DATE + ") DESC";
         Log.i("query", selectQuery);
         Cursor res = db.rawQuery(selectQuery, null);
